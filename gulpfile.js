@@ -7,12 +7,19 @@ var gulp      = require('gulp'),
     fs        = require('fs'),
     sass      = require('gulp-sass');
 
+var postsPath = './src/content/posts/';
+var postsArr  = fs.readdirSync(postsPath);
+var posts     = [];
+
+for(var i = 0; i < postsArr.length; i ++) {
+  posts.push(fs.readFileSync(postsPath + postsArr[i], 'utf8'));
+}
+
 gulp.task('compile', function() {
   gulp.src('src/templates/index.html')
-    .pipe(data(function() {
+    .pipe(data(function(file) {
       var mdfile = fs.readFileSync('./src/content/index.md', 'utf8');
-      console.log(mdfile);
-      return { post: mdfile };
+      return { posts: [mdfile, 'lol']  };
     }))
     .pipe(template())
     .pipe(concat('index.html'))
