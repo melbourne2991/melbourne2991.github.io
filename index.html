@@ -1,12 +1,9 @@
-<!doctype>
-<html>
-<head>
-	
-</head>
-<body>
-
-	Testingz
-
-	lol
-
-</body>
+---
+layout: default
+---
+    {% for post in site.posts %}
+      {{ post.date | date: "%b %-d, %Y" }}
+      {{ post.title }}
+    {% endfor %}
+    
+  subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a>
