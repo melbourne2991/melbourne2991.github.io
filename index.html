@@ -1,9 +1,22 @@
 ---
 layout: default
 ---
+
     {% for post in site.posts %}
-      {{ post.date | date: "%b %-d, %Y" }}
-      {{ post.title }}
+    <div class="post row">
+      <div class="unit col-md-24-24">
+        <h2>{{ post.title }}</h2>
+        <div class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</div>
+         
+        {% capture post_url %}... <a href="{{ post.url | prepend: site.baseurl }}">continue reading</a> {% endcapture %}
+        {{ post.content | truncate: 200, post_url }}
+      </div>
+    </div>
     {% endfor %}
-    
-  subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a>
+
+
+  <div class="subscribe-box row">
+    <div class="unit col-md-24-24">
+    subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a>
+    </div>
+  </div>

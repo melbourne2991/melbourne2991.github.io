@@ -1,0 +1,217 @@
+* {
+	box-sizing: border-box;
+}
+
+// Clearfix
+
+@mixin clearfix {
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.clearfix, .row {
+  @include clearfix();
+}
+
+// Center Block Element
+
+@mixin margin-center {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.margin-center {
+  @include margin-center();
+}
+
+// Horizontal Menu
+
+@mixin horizontal-menu {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  li {
+    display: inline-block;
+  }
+}
+
+.horizontal-menu {
+  @include horizontal-menu();
+}
+
+@mixin list-reset {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.list-reset {
+  @include list-reset();
+}
+
+// Basics
+.align-center {
+  text-align: center;
+}
+
+@mixin color-button($color) {
+    background: $color;
+
+    // @if(i != 0) {
+    //   border-bottom: 4px darken($color, 10%) solid;
+    // }
+
+    &:hover {
+      // border-bottom: 4px darken($color, 5%) solid;
+    }
+}
+
+@mixin unit {
+	@include clearfix();
+	display: block;
+	float: left;
+	min-height: 1px;
+	position: relative;
+}
+
+.unit.nopad {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.unit {
+	@include unit();
+	padding-left: $margin-size/2;
+	padding-right: $margin-size/2;
+}
+
+.unit .unit {
+	&:first-child {
+		padding-left: 0;
+	}
+
+	&:last-child {
+		padding-right: 0;
+	}
+}
+
+* {
+	box-sizing: border-box;
+}
+
+@mixin columns($unit_prefix) {
+	@for $i from 1 through 24 {
+		@if $unit_prefix {
+			.col-#{$unit_prefix}-#{$i}-24 {
+				@include unit();
+				width: ($i/24)*100%;
+			}
+		} @else {
+			.col-#{$i}-24 {
+				@include unit();
+				width: ($i/24)*100%;
+			}		
+		}
+	}	
+}
+
+@include columns(false);
+
+@mixin container {
+	@include margin-center();
+	@include clearfix();
+}
+
+.container {
+	padding-left: $margin-size/2;
+	padding-right: $margin-size/2;
+	@include container();
+}
+
+@media(min-width: 768px) {
+	.container {
+		@include container();
+		width: $sm-container-width;
+	}
+	@include columns(md);
+}
+
+@media(min-width: 992px) {
+	.container {
+		@include container();
+		width: $md-container-width;
+	}
+
+	@include columns(lg);
+}
+
+@media(min-width: 1200px) {
+	.container {
+		@include container();
+		width: $lg-container-width;
+	}
+
+	@include columns(xl);
+}
+
+@mixin container {
+	@include clearfix();
+}
+
+.container {
+	@include container();
+}
+
+.align-right {
+	text-align: right;
+}
+
+.align-center {
+	text-align: center;
+}
+
+
+//---- Base Styles ------//
+body {
+	font-family: $base-font-family;
+	background: lighten(#EEF7BE, 10%);
+}
+
+a {
+	text-decoration: none;
+	color: #63BF98;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	color: $header-color;
+}
+
+h1 {
+	font-size: 24px;
+}
+
+header, img, input, label {
+	margin-bottom: $margin-size;
+	margin-top: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;
+	margin-bottom: $margin-size/2;
+}
+
+p {
+	line-height: 2;
+}

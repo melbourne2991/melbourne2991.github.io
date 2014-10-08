@@ -2,6 +2,11 @@
 layout: default
 ---
 
-{{ page.title }}
-{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}
+<div class="unit col-md-24-24">
+<div class="back"><a href="{{ site.url }}">Back to home</a></div>
+
+<h2>{{ page.title }}</h2>	
+<div class="post-meta">{{ page.date | date: "%b %-d, %Y" }}</div>
+{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}
 {{ content }}
+</div>
